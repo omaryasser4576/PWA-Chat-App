@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "394803825107",
+    "project_id": "pwa-caht",
+    "storage_bucket": "pwa-caht.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394803825107:android:e8f78e2c7a1aa89a73c726",
+        "android_client_info": {
+          "package_name": "com.example.pwa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs9xqEyh_NXw-PyFZiVJ5bL26bYu4chnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

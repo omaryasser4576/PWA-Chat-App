@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => AuthCubit(
             getIt.get<AuthDataSourceImpl>(),
-          ),
+          )..checkCurrentUser(),
         ),
         BlocProvider(
           create: (context) => GetUsersCubit(
@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
             getIt.get<ChatsRepoImpl>(),
           ),
         ),
-      ],  
+      ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'PWA',

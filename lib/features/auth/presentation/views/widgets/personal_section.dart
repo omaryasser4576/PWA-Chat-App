@@ -24,12 +24,6 @@ class _PersonalSectionState extends State<PersonalSection> {
   String? fullName;
   String? phoneNumber;
 
-  @override
-  void dispose() {
-    super.dispose();
-    deleteUser();
-  }
-
   void deleteUser() {
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser != null) {

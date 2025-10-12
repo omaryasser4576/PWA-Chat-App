@@ -11,6 +11,15 @@ class AuthCubit extends Cubit<AuthStates> {
 
   final AuthDataSource authDataSource;
 
+  Future<void> checkCurrentUser() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      emit(AuthAlreadyLoggedIn());
+    } else {
+      emit(AuthLoggedOut());
+    }
+  }
+
   Future<void> login({required String email, required String password}) async {
     emit(AuthLoginLoading());
     final result = await authDataSource.login(
@@ -56,7 +65,6 @@ class AuthCubit extends Cubit<AuthStates> {
       username: username,
       userImage: userImage,
     );
-
     result.fold(
       (failure) {
         emit(AuthFailure(failure.errorMessage));

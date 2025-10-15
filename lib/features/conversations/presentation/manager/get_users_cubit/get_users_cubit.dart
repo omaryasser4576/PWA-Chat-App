@@ -7,19 +7,39 @@ part 'get_users_state.dart';
 class GetUsersCubit extends Cubit<GetUsersState> {
   GetUsersCubit(this.usersRepo) : super(GetUsersInitial());
   final UsersRepo usersRepo;
+  List<UserModel>? usersList;
+  List<UserModel> searchedUsers = [];
   Future<void> getUsers() async {
     emit(GetUsersLoading());
-    print('Getting users...');
     final result = await usersRepo.getUsers();
     result.fold(
       (failure) {
-        print('Failure: ${failure.errorMessage}');
         emit(GetUsersFailure(failure.errorMessage));
       },
       (users) {
-        print('Users count: ${users.length}');
+        usersList = users;
         emit(GetUsersSuccess(users));
       },
     );
+  }
+
+  List<UserModel> searchForUsersByUsername({required String username}) {
+    if (usersList == null || usersList!.isEmpty) {
+      return [];
+    }
+    if (username.isEmpty || username.trim().isEmpty) {
+      return [];
+    }
+    emit(SearchUsersLoading());
+    searchedUsers = usersList!
+        .where(
+          (user) => user.username.contains(username),
+        )
+        .toList();
+    if (searchedUsers.isEmpty) {
+      emit(SearchUsersEmpty());
+    }
+      emit(SearchUsersSuccess(searchedUsers));
+    return searchedUsers;
   }
 }

@@ -11,26 +11,30 @@ class UsersListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetUsersCubit, GetUsersState>(
       builder: (context, state) {
-        if (state is GetUsersSuccess) {
+        if (state is SearchUsersSuccess) {
           final users = state.users;
           return ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             itemCount: users.length,
             itemBuilder: (context, index) => AddUserItem(user: users[index]),
           );
-        } else if (state is GetUsersLoading) {
+        } else if (state is SearchUsersLoading) {
           return ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             itemCount: 3,
             itemBuilder: (context, index) => const AddUserItemShimmer(),
           );
-        } else if( state is GetUsersFailure) {
+        } else if (state is GetUsersFailure) {
           return Center(
             child: Text(state.errorMessage),
           );
-        } else {
+        } else if (state is SearchUsersEmpty) {
           return const Center(
             child: Text('There are not users'),
+          );
+        } else {
+          return const Center(
+            child: Text('Start searching for users...'),
           );
         }
       },

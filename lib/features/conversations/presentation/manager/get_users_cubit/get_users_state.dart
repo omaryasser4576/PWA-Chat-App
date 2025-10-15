@@ -17,3 +17,15 @@ final class GetUsersFailure extends GetUsersState {
 
   GetUsersFailure(this.errorMessage);
 }
+
+// for search
+
+final class SearchUsersLoading extends GetUsersState {}
+
+final class SearchUsersSuccess extends GetUsersState {
+  final List<UserModel> users;
+
+  SearchUsersSuccess(this.users);
+}
+
+final class SearchUsersEmpty extends GetUsersState {}

@@ -13,7 +13,6 @@ class UsersDataSourceImpl extends UsersDataSource {
     final currentUser = FirebaseAuth.instance.currentUser;
 
     if (currentUser == null) {
-      print('⚠️ No current user found in getUsers()');
       return [];
     }
 

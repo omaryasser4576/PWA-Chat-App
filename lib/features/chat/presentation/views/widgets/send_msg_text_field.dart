@@ -87,13 +87,13 @@ class _SendMsgTextFieldState extends State<SendMsgTextField> {
       sendDate: DateTime.now(),
       senderEmail: currentUserEmail!,
     );
-    await BlocProvider.of<SendMessageCubit>(
-      context,
-    ).sendMessage(message: messageModel);
-    _controller.clear();
     setState(() {
       message = null;
     });
+    _controller.clear();
+    await BlocProvider.of<SendMessageCubit>(
+      context,
+    ).sendMessage(message: messageModel);
   }
 
   OutlineInputBorder outlineBorder() {

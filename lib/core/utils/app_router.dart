@@ -12,6 +12,7 @@ import 'package:pwa/features/chat/presentation/views/screens/chat_screen.dart';
 import 'package:pwa/features/conversations/data/models/chat_model.dart';
 import 'package:pwa/features/conversations/data/repos/chats_repo/chats_repo_impl.dart';
 import 'package:pwa/features/conversations/presentation/manager/create_chat_cubit/create_chat_cubit.dart';
+import 'package:pwa/features/conversations/presentation/manager/search_for_users_cubit/search_for_user_cubit.dart';
 import 'package:pwa/features/conversations/presentation/views/screens/add_user_screen.dart';
 import 'package:pwa/features/conversations/presentation/views/screens/conversations_screen.dart';
 
@@ -87,10 +88,17 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: addUserScreen,
-        builder: (context, state) => BlocProvider(
-          create: (context) => CreateChatCubit(
-            getIt.get<ChatsRepoImpl>(),
-          ),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => CreateChatCubit(
+                getIt.get<ChatsRepoImpl>(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => SearchForUserCubit(),
+            ),
+          ],
           child: const AddUserScreen(),
         ),
       ),

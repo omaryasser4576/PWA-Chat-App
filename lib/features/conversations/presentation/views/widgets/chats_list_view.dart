@@ -22,10 +22,11 @@ class ChatsListView extends StatelessWidget {
                 chat: chats[index],
               ),
             );
+          } else {
+            return const Center(
+              child: Text('Start chatting with your friends...'),
+            );
           }
-          return const Center(
-            child: Text('Start chatting with your friends...'),
-          );
         } else if (state is GetChatsLoading) {
           return ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -38,7 +39,7 @@ class ChatsListView extends StatelessWidget {
           );
         } else {
           return const Center(
-            child: Text('Start chatting with your friends...'),
+            child: Text(''),
           );
         }
       },

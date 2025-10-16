@@ -5,7 +5,6 @@ part 'search_for_user_state.dart';
 
 class SearchForUserCubit extends Cubit<SearchForUserState> {
   SearchForUserCubit() : super(SearchForUserInitial());
-
   List<UserModel> usersList = [];
   List<UserModel> searchedUsers = [];
   void searchForUsersByUsername({required String username}) {

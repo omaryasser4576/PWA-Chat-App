@@ -1,11 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pwa/core/utils/colors_theme.dart';
 import 'package:pwa/core/utils/styles.dart';
 import 'package:pwa/features/chat/data/models/message_model.dart';
 
-class SenderMsgBubble extends StatelessWidget {
+class SenderMsgBubble extends StatefulWidget {
   const SenderMsgBubble({super.key, required this.message});
   final MessageModel message;
+
+  @override
+  State<SenderMsgBubble> createState() => _SenderMsgBubbleState();
+}
+
+class _SenderMsgBubbleState extends State<SenderMsgBubble> {
+  final currentUserImage = FirebaseAuth.instance.currentUser?.photoURL;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +27,11 @@ class SenderMsgBubble extends StatelessWidget {
             height: 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
-              image: const DecorationImage(
-                image: AssetImage('assets/images/test.png'),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: currentUserImage != null
+                    ? NetworkImage(currentUserImage!)
+                    : const AssetImage('assets/images/test.png'),
               ),
             ),
           ),
@@ -40,7 +51,7 @@ class SenderMsgBubble extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    message.message,
+                    widget.message.message,
                     style: Styles.textStyle12.copyWith(
                       color: Colors.white,
                     ),
@@ -48,7 +59,7 @@ class SenderMsgBubble extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  "10 AM",
+                  "${widget.message.sendDate.hour}:${widget.message.sendDate.minute} ",
                   style: Styles.textStyle7,
                 ),
               ],

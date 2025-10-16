@@ -44,7 +44,7 @@ class ReceivedMsgBubble extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  "10 AM",
+                  "${message.sendDate.hour}:${message.sendDate.minute} ",
                   style: Styles.textStyle7,
                 ),
               ],
@@ -57,9 +57,14 @@ class ReceivedMsgBubble extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
               image: DecorationImage(
+                fit: BoxFit.cover,
                 image: user.userImage != null
-                    ? NetworkImage(user.userImage!)
-                    : const AssetImage('assets/images/test.png'),
+                    ? NetworkImage(
+                        user.userImage!,
+                      )
+                    : const AssetImage(
+                        'assets/images/test.png',
+                      ),
               ),
             ),
           ),

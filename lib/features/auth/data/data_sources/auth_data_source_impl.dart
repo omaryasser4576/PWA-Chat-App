@@ -80,6 +80,7 @@ class AuthDataSourceImpl extends AuthDataSource {
         uploadUserImage = await uploadUserImageToSupabase(
           file,
         );
+        currentUser.updatePhotoURL(uploadUserImage);
       }
 
       final user = UserModel(
